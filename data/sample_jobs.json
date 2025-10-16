@@ -1,0 +1,43 @@
+{
+  "jobs": [
+    {
+      "id": "job_001",
+      "title": "Développeur Python IA",
+      "company": "TechCorp",
+      "location": "Paris",
+      "description": "Nous cherchons un développeur Python avec expérience en Machine Learning pour rejoindre notre équipe IA.",
+      "required_skills": ["Python", "Machine Learning", "Deep Learning"],
+      "experience_required": 2,
+      "job_type": "CDI",
+      "salary_min": 40000,
+      "salary_max": 55000,
+      "posted_date": "2025-01-15"
+    },
+    {
+      "id": "job_002",
+      "title": "Ingénieur Data Science",
+      "company": "DataSolutions",
+      "location": "Lyon",
+      "description": "Rejoignez notre équipe data pour analyser et modéliser les données. Expérience en Python et Data Analysis requise.",
+      "required_skills": ["Python", "Data Analysis", "SQL"],
+      "experience_required": 3,
+      "job_type": "CDI",
+      "salary_min": 38000,
+      "salary_max": 52000,
+      "posted_date": "2025-01-14"
+    },
+    {
+      "id": "job_003",
+      "title": "Frontend Developer React",
+      "company": "WebStudio",
+      "location": "Paris",
+      "description": "Nous recrutons un développeur React expérimenté pour créer des interfaces modernes.",
+      "required_skills": ["JavaScript", "React", "CSS"],
+      "experience_required": 1,
+      "job_type": "CDI",
+      "salary_min": 32000,
+      "salary_max": 48000,
+      "posted_date": "2025-01-10"
+    }
+  ]
+}
