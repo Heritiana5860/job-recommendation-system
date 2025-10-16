@@ -1,0 +1,28 @@
+{
+  "profiles": [
+    {
+      "id": "user_001",
+      "name": "Jean Dupont",
+      "email": "jean.dupont@email.com",
+      "skills": ["Python", "Machine Learning", "Data Analysis"],
+      "experience_years": 3,
+      "desired_location": "Paris",
+      "job_types": ["CDI", "Stage"],
+      "salary_min": 35000,
+      "salary_max": 50000,
+      "keywords": "développeur IA data science"
+    },
+    {
+      "id": "user_002",
+      "name": "Marie Martin",
+      "email": "marie.martin@email.com",
+      "skills": ["JavaScript", "React", "Node.js"],
+      "experience_years": 2,
+      "desired_location": "Lyon",
+      "job_types": ["CDI"],
+      "salary_min": 30000,
+      "salary_max": 45000,
+      "keywords": "développeur web frontend"
+    }
+  ]
+}
