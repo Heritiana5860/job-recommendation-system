@@ -1,0 +1,64 @@
+{
+  "profiles": [
+    {
+      "id": "user_mg_001",
+      "name": "Rakoto Jean",
+      "email": "rakoto.jean@example.com",
+      "skills": ["Python", "Django", "Machine Learning"],
+      "experience_years": 3,
+      "desired_location": "Antananarivo",
+      "job_types": ["CDI", "Stage"],
+      "salary_min": 1500000,
+      "salary_max": 3000000,
+      "keywords": "développeur Python data science"
+    },
+    {
+      "id": "user_mg_002",
+      "name": "Nathalie Andrianampoinimerina",
+      "email": "nathalie.andri@example.com",
+      "skills": ["React", "JavaScript", "HTML", "CSS"],
+      "experience_years": 2,
+      "desired_location": "Antananarivo",
+      "job_types": ["CDI", "Stage"],
+      "salary_min": 1200000,
+      "salary_max": 2500000,
+      "keywords": "développeur frontend React"
+    },
+    {
+      "id": "user_mg_003",
+      "name": "Michel Rakotondramasy",
+      "email": "michel.rakoto@example.com",
+      "skills": ["Java", "Spring Boot", "SQL"],
+      "experience_years": 4,
+      "desired_location": "Antananarivo",
+      "job_types": ["CDI"],
+      "salary_min": 2000000,
+      "salary_max": 4000000,
+      "keywords": "ingénieur backend Java"
+    },
+    {
+      "id": "user_mg_004",
+      "name": "Sophie Rasoloarison",
+      "email": "sophie.rasolo@example.com",
+      "skills": ["Data Analysis", "Python", "SQL", "Tableau"],
+      "experience_years": 2,
+      "desired_location": "Antananarivo",
+      "job_types": ["CDI", "Stage"],
+      "salary_min": 1800000,
+      "salary_max": 3500000,
+      "keywords": "analyste données data analyst"
+    },
+    {
+      "id": "user_mg_005",
+      "name": "Luc Razafindraibe",
+      "email": "luc.razafind@example.com",
+      "skills": ["DevOps", "Docker", "Kubernetes", "AWS"],
+      "experience_years": 3,
+      "desired_location": "Antananarivo",
+      "job_types": ["CDI"],
+      "salary_min": 2200000,
+      "salary_max": 4500000,
+      "keywords": "ingénieur devops cloud"
+    }
+  ]
+}
