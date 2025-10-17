@@ -1,17 +1,19 @@
-# Moteur de matching simple
-
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import numpy as np
+from nltk.corpus import stopwords
 from config import MIN_MATCH_SCORE, TOP_N_RECOMMENDATIONS
 
 class SimpleMatcher:
     """Moteur de matching basé sur TF-IDF et similarité cosinus"""
     
     def __init__(self):
+        # Charger les stop words français
+        french_stops = set(stopwords.words('french'))
+        
         self.vectorizer = TfidfVectorizer(
             lowercase=True,
-            stop_words='french',
+            stop_words=list(french_stops),
             analyzer='word',
             ngram_range=(1, 2)
         )
@@ -73,13 +75,14 @@ class SimpleMatcher:
             score += 0.1
         
         # Bonus si le salaire correspond
-        job_salary_min = job.get('salary_min', 0)
-        job_salary_max = job.get('salary_max', 999999)
+        job_salary_min = job.get('salary_min') or 0
+        job_salary_max = job.get('salary_max') or 999999
         profile_salary_min = profile.get('salary_min', 0)
         profile_salary_max = profile.get('salary_max', 999999)
         
-        if job_salary_min <= profile_salary_max and job_salary_max >= profile_salary_min:
-            score += 0.05
+        if job_salary_min and job_salary_max:  # Seulement si les deux valeurs existent
+            if job_salary_min <= profile_salary_max and job_salary_max >= profile_salary_min:
+                score += 0.05
         
         return min(score, 1.0)  # Cap à 1.0
     
