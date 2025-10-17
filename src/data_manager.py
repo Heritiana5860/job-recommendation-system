@@ -3,7 +3,7 @@
 import json
 import pandas as pd
 from pathlib import Path
-from config import SAMPLE_PROFILES_FILE, SAMPLE_JOBS_FILE
+from config import SAMPLE_PROFILES_FILE, SAMPLE_JOBS_FILE, SCRAPED_JOBS_FILE
 
 class DataManager:
     """Gestionnaire de données pour profils et offres d'emploi"""
@@ -59,3 +59,15 @@ class DataManager:
         with open(file_path, 'w', encoding='utf-8') as f:
             json.dump({'jobs': self.jobs}, f, ensure_ascii=False, indent=2)
         print(f"✓ Offres sauvegardées")
+        
+    def load_scraped_jobs(self, file_path=SCRAPED_JOBS_FILE):
+        """Charge les offres d'emploi scrappées depuis un JSON"""
+        try:
+            with open(file_path, 'r', encoding='utf-8') as f:
+                data = json.load(f)
+            self.jobs = data.get('jobs', [])
+            print(f"✓ {len(self.jobs)} offres scrappées chargées")
+            return self.jobs
+        except FileNotFoundError:
+            print(f"⚠️  Aucune offre scrappée trouvée. Lancez d'abord le scraper.")
+            return []
