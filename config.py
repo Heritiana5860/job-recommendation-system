@@ -34,12 +34,12 @@ RAPIDAPI_HOST = os.getenv('RAPIDAPI_HOST', 'jsearch.p.rapidapi.com')
 
 # Configuration de recherche
 SEARCH_QUERIES = [
-    {"query": "Python developer Madagascar", "location": "Madagascar"},
-    {"query": "Data scientist Madagascar", "location": "Madagascar"},
-    {"query": "Frontend developer Madagascar", "location": "Madagascar"},
-    {"query": "développeur Antananarivo", "location": "Madagascar"},
-    {"query": "ingénieur logiciel Madagascar", "location": "Madagascar"},
-    {"query": "stage informatique Madagascar", "location": "Madagascar"},
+    {"query": "Python developer", "location": "Antananarivo, Madagascar"},
+    {"query": "Python developer", "location": "Fianarantsoa, Madagascar"},
+    {"query": "Python developer", "location": "Toliara, Madagascar"},
+    {"query": "Data scientist", "location": "Antananarivo, Madagascar"},
+    {"query": "Data scientist", "location": "Fianarantsoa, Madagascar"},
+    {"query": "Machine learning", "location": "Madagascar"},
 ]
 
 # Logging
