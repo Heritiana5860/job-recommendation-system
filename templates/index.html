@@ -1,0 +1,162 @@
+{% extends "base.html" %} {% block title %}Accueil - Recommandations d'Emploi{%
+endblock %} {% block content %}
+<h2>Bienvenue sur le Système de Recommandation d'Emploi</h2>
+
+<p style="margin: 20px 0; font-size: 16px; line-height: 1.8; color: #555">
+  Cette application utilise l'<strong>intelligence artificielle</strong> et les
+  <strong>embeddings Word2Vec</strong>
+  pour analyser votre profil et recommander les meilleures offres d'emploi
+  adaptées à vos compétences et vos préférences.
+</p>
+
+<div class="grid-2" style="margin: 40px 0">
+  <div
+    style="
+      border: 1px solid #ddd;
+      padding: 25px;
+      border-radius: 8px;
+      background: #f9f9f9;
+    "
+  >
+    <h3 style="color: #667eea; margin-bottom: 15px">Comment ça fonctionne?</h3>
+    <ol style="margin-left: 20px; line-height: 1.8">
+      <li>Complétez votre profil avec vos compétences</li>
+      <li>Le système scrape les offres d'emploi</li>
+      <li>Entraîne un modèle Word2Vec</li>
+      <li>Calcule la similarité avec votre profil</li>
+      <li>Vous reçoit les recommandations par email</li>
+    </ol>
+  </div>
+
+  <div
+    style="
+      border: 1px solid #ddd;
+      padding: 25px;
+      border-radius: 8px;
+      background: #f9f9f9;
+    "
+  >
+    <h3 style="color: #667eea; margin-bottom: 15px">Fonctionnalités</h3>
+    <ul style="margin-left: 20px; line-height: 1.8">
+      <li>✓ Matching intelligent basé sur l'IA</li>
+      <li>✓ Recommandations personnalisées</li>
+      <li>✓ Envoi d'emails automatiques</li>
+      <li>✓ Interface web intuitive</li>
+      <li>✓ Support pour remote work</li>
+    </ul>
+  </div>
+</div>
+
+<div
+  style="
+    margin: 40px 0;
+    padding: 25px;
+    background: #f0f7ff;
+    border-radius: 8px;
+    border-left: 4px solid #667eea;
+  "
+>
+  <h3 style="margin-bottom: 15px">Commencez maintenant</h3>
+  <p style="margin-bottom: 15px">Deux options pour tester le système:</p>
+
+  <div class="grid-2">
+    <div>
+      <h4>Tester avec les profils existants</h4>
+      <p style="margin: 10px 0; color: #666; font-size: 14px">
+        Voir les recommandations en action avec nos profils de test
+      </p>
+      <button
+        class="btn"
+        onclick="testRecommendations()"
+        style="width: 100%; margin-top: 15px"
+      >
+        Voir les recommandations
+      </button>
+    </div>
+
+    <div>
+      <h4>Créer mon profil</h4>
+      <p style="margin: 10px 0; color: #666; font-size: 14px">
+        Personnalisez vos préférences et recevez des recommandations adaptées
+      </p>
+      <a
+        href="/profile"
+        class="btn"
+        style="width: 100%; text-align: center; margin-top: 15px"
+      >
+        Créer mon profil
+      </a>
+    </div>
+  </div>
+</div>
+
+<div id="result" style="margin-top: 30px; display: none">
+  <div id="resultContent"></div>
+</div>
+
+<script>
+  function testRecommendations() {
+    const btn = event.target;
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spinner"></span> Chargement...';
+
+    fetch("/api/test-recommendations", {
+      method: "POST",
+    })
+      .then((r) => r.json())
+      .then((data) => {
+        if (data.success) {
+          let html = `<div class="alert alert-success">
+                        <h3>Résultats pour ${data.profile_name}</h3>
+                        <p>${data.total} recommandations trouvées</p>
+                    </div>`;
+
+          data.recommendations.forEach((rec, i) => {
+            html += `<div class="job-card">
+                            <div class="job-header">
+                                <div>
+                                    <div class="job-title">${i + 1}. ${
+              rec.job_title
+            }</div>
+                                    <div class="job-meta">
+                                        <div class="job-company">${
+                                          rec.company
+                                        }</div>
+                                        <div class="job-location">${
+                                          rec.location
+                                        }</div>
+                                    </div>
+                                </div>
+                                <div class="match-score">${(
+                                  rec.score * 100
+                                ).toFixed(1)}%</div>
+                            </div>
+                            <a href="${
+                              rec.url
+                            }" target="_blank" class="job-link">Voir l'offre →</a>
+                        </div>`;
+          });
+
+          document.getElementById("resultContent").innerHTML = html;
+          document.getElementById("result").style.display = "block";
+        } else {
+          document.getElementById(
+            "resultContent"
+          ).innerHTML = `<div class="alert alert-error">Erreur: ${data.error}</div>`;
+          document.getElementById("result").style.display = "block";
+        }
+
+        btn.disabled = false;
+        btn.innerHTML = "Voir les recommandations";
+      })
+      .catch((e) => {
+        document.getElementById(
+          "resultContent"
+        ).innerHTML = `<div class="alert alert-error">Erreur: ${e.message}</div>`;
+        document.getElementById("result").style.display = "block";
+        btn.disabled = false;
+        btn.innerHTML = "Voir les recommandations";
+      });
+  }
+</script>
+{% endblock %}

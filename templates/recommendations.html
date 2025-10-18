@@ -1,0 +1,114 @@
+{% extends "base.html" %} {% block title %}Mes Recommandations - Emploi{%
+endblock %} {% block content %}
+<h2>Mes Recommandations d'Emploi</h2>
+
+<div id="loading" style="text-align: center; margin: 40px 0; display: none">
+  <div class="spinner" style="margin: 0 auto"></div>
+  <p style="margin-top: 15px; color: #666">
+    Génération des recommandations en cours...
+  </p>
+</div>
+
+<div id="content" style="display: none">
+  <div
+    id="profile-info"
+    style="
+      background: #f0f7ff;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 30px;
+    "
+  ></div>
+  <div id="recommendations"></div>
+</div>
+
+<div id="error" style="display: none"></div>
+
+<script>
+  function loadRecommendations() {
+    const profile = JSON.parse(sessionStorage.getItem("userProfile"));
+
+    if (!profile) {
+      document.getElementById("error").innerHTML =
+        '<div class="alert alert-error">Veuillez d\'abord créer votre profil</div>' +
+        '<a href="/profile" class="btn" style="margin-top: 15px;">Créer mon profil</a>';
+      document.getElementById("error").style.display = "block";
+      return;
+    }
+
+    document.getElementById("loading").style.display = "block";
+
+    // Afficher les infos du profil
+    const profileInfo = `
+                <h3>${profile.name}</h3>
+                <p><strong>Compétences:</strong> ${profile.skills.join(
+                  ", "
+                )}</p>
+                <p><strong>Localisation:</strong> ${
+                  profile.desired_location
+                }</p>
+                <p><strong>Salaire:</strong> $${profile.salary_min} - $${
+      profile.salary_max
+    }/mois</p>
+            `;
+    document.getElementById("profile-info").innerHTML = profileInfo;
+
+    // Fetch recommendations
+    fetch("/api/test-recommendations", {
+      method: "POST",
+    })
+      .then((r) => r.json())
+      .then((data) => {
+        document.getElementById("loading").style.display = "none";
+
+        if (data.success && data.recommendations.length > 0) {
+          let html = `<div class="alert alert-success">
+                        ${data.total} offres pertinentes trouvées pour votre profil
+                    </div>`;
+
+          data.recommendations.forEach((rec, i) => {
+            html += `<div class="job-card">
+                            <div class="job-header">
+                                <div>
+                                    <div class="job-title">${i + 1}. ${
+              rec.job_title
+            }</div>
+                                    <div class="job-meta">
+                                        <div class="job-company">${
+                                          rec.company
+                                        }</div>
+                                        <div class="job-location">${
+                                          rec.location
+                                        }</div>
+                                    </div>
+                                </div>
+                                <div class="match-score">${(
+                                  rec.score * 100
+                                ).toFixed(1)}%</div>
+                            </div>
+                            <a href="${
+                              rec.url
+                            }" target="_blank" class="job-link">Voir l'offre →</a>
+                        </div>`;
+          });
+
+          document.getElementById("recommendations").innerHTML = html;
+        } else {
+          document.getElementById("recommendations").innerHTML =
+            '<div class="alert alert-info">Aucune recommandation trouvée</div>';
+        }
+
+        document.getElementById("content").style.display = "block";
+      })
+      .catch((e) => {
+        document.getElementById("loading").style.display = "none";
+        document.getElementById(
+          "error"
+        ).innerHTML = `<div class="alert alert-error">Erreur: ${e.message}</div>`;
+        document.getElementById("error").style.display = "block";
+      });
+  }
+
+  loadRecommendations();
+</script>
+{% endblock %}

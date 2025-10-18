@@ -1,0 +1,187 @@
+{% extends "base.html" %} {% block title %}Mon Profil - Recommandations
+d'Emploi{% endblock %} {% block content %}
+<h2>Mon Profil</h2>
+
+<form id="profileForm" style="max-width: 600px; margin-top: 30px">
+  <div class="form-group">
+    <label for="name">Nom</label>
+    <input type="text" id="name" name="name" required />
+  </div>
+
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email" required />
+  </div>
+
+  <div class="form-group">
+    <label for="experience">Années d'expérience</label>
+    <input
+      type="number"
+      id="experience"
+      name="experience"
+      min="0"
+      max="50"
+      value="2"
+      required
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="location">Localisation préférée</label>
+    <input
+      type="text"
+      id="location"
+      name="location"
+      placeholder="ex: Remote, Paris, Antananarivo"
+      value="Remote"
+    />
+  </div>
+
+  <div class="form-group">
+    <label>Compétences techniques</label>
+    <div class="checkbox-group">
+      <div class="checkbox-item">
+        <input type="checkbox" name="skills" value="Python" id="skill_python" />
+        <label for="skill_python">Python</label>
+      </div>
+      <div class="checkbox-item">
+        <input type="checkbox" name="skills" value="JavaScript" id="skill_js" />
+        <label for="skill_js">JavaScript</label>
+      </div>
+      <div class="checkbox-item">
+        <input type="checkbox" name="skills" value="React" id="skill_react" />
+        <label for="skill_react">React</label>
+      </div>
+      <div class="checkbox-item">
+        <input type="checkbox" name="skills" value="Java" id="skill_java" />
+        <label for="skill_java">Java</label>
+      </div>
+      <div class="checkbox-item">
+        <input
+          type="checkbox"
+          name="skills"
+          value="Data Analysis"
+          id="skill_data"
+        />
+        <label for="skill_data">Data Analysis</label>
+      </div>
+      <div class="checkbox-item">
+        <input
+          type="checkbox"
+          name="skills"
+          value="Machine Learning"
+          id="skill_ml"
+        />
+        <label for="skill_ml">Machine Learning</label>
+      </div>
+      <div class="checkbox-item">
+        <input type="checkbox" name="skills" value="Docker" id="skill_docker" />
+        <label for="skill_docker">Docker</label>
+      </div>
+      <div class="checkbox-item">
+        <input type="checkbox" name="skills" value="AWS" id="skill_aws" />
+        <label for="skill_aws">AWS</label>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="keywords">Description courte de votre profil</label>
+    <textarea
+      id="keywords"
+      name="keywords"
+      rows="3"
+      placeholder="ex: Développeur Python avec expérience en Machine Learning"
+    ></textarea>
+  </div>
+
+  <div class="form-group">
+    <label for="salary_min">Salaire minimum (USD/mois)</label>
+    <input
+      type="number"
+      id="salary_min"
+      name="salary_min"
+      min="0"
+      value="2000"
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="salary_max">Salaire maximum (USD/mois)</label>
+    <input
+      type="number"
+      id="salary_max"
+      name="salary_max"
+      min="0"
+      value="5000"
+    />
+  </div>
+
+  <div class="form-group">
+    <label>Type de contrat préféré</label>
+    <div class="checkbox-group">
+      <div class="checkbox-item">
+        <input
+          type="checkbox"
+          name="job_types"
+          value="CDI"
+          id="type_cdi"
+          checked
+        />
+        <label for="type_cdi">CDI</label>
+      </div>
+      <div class="checkbox-item">
+        <input
+          type="checkbox"
+          name="job_types"
+          value="Remote"
+          id="type_remote"
+          checked
+        />
+        <label for="type_remote">Remote</label>
+      </div>
+      <div class="checkbox-item">
+        <input type="checkbox" name="job_types" value="Stage" id="type_stage" />
+        <label for="type_stage">Stage</label>
+      </div>
+    </div>
+  </div>
+
+  <button type="submit" class="btn">Sauvegarder le profil</button>
+</form>
+
+<div id="message" style="margin-top: 20px; display: none"></div>
+
+<script>
+  document
+    .getElementById("profileForm")
+    .addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const formData = new FormData(this);
+      const data = {
+        name: formData.get("name"),
+        email: formData.get("email"),
+        experience_years: parseInt(formData.get("experience")),
+        desired_location: formData.get("location"),
+        skills: formData.getAll("skills"),
+        keywords: formData.get("keywords"),
+        salary_min: parseInt(formData.get("salary_min")),
+        salary_max: parseInt(formData.get("salary_max")),
+        job_types: formData.getAll("job_types"),
+      };
+
+      // Sauvegarder en session storage
+      sessionStorage.setItem("userProfile", JSON.stringify(data));
+
+      const msg = document.getElementById("message");
+      msg.innerHTML =
+        '<div class="alert alert-success">Profil sauvegardé! Vous pouvez maintenant voir vos recommandations.</div>';
+      msg.style.display = "block";
+
+      setTimeout(() => {
+        window.location.href = "/recommendations";
+      }, 2000);
+    });
+</script>
+{% endblock %}
