@@ -1,0 +1,100 @@
+{
+  "profiles": [
+    {
+      "id": "user_mg_001",
+      "name": "Rakoto Jean",
+      "email": "rakoto.jean@example.com",
+      "skills": [
+        "Python",
+        "Django",
+        "Machine Learning"
+      ],
+      "experience_years": 3,
+      "desired_location": "Remote",
+      "job_types": [
+        "CDI",
+        "Remote"
+      ],
+      "salary_min": 2000,
+      "salary_max": 4000,
+      "keywords": "Python developer machine learning remote telework"
+    },
+    {
+      "id": "user_mg_002",
+      "name": "Nathalie Andrianampoinimerina",
+      "email": "nathalie.andri@example.com",
+      "skills": [
+        "React",
+        "JavaScript",
+        "HTML",
+        "CSS"
+      ],
+      "experience_years": 2,
+      "desired_location": "Remote",
+      "job_types": [
+        "CDI",
+        "Remote"
+      ],
+      "salary_min": 1500,
+      "salary_max": 3000,
+      "keywords": "frontend developer React JavaScript remote telework"
+    },
+    {
+      "id": "user_mg_003",
+      "name": "Michel Rakotondramasy",
+      "email": "michel.rakoto@example.com",
+      "skills": [
+        "Java",
+        "Spring Boot",
+        "SQL"
+      ],
+      "experience_years": 4,
+      "desired_location": "Remote",
+      "job_types": [
+        "CDI"
+      ],
+      "salary_min": 2500,
+      "salary_max": 5000,
+      "keywords": "backend engineer Java Spring Boot remote telework"
+    },
+    {
+      "id": "user_mg_004",
+      "name": "Sophie Rasoloarison",
+      "email": "sophie.rasolo@example.com",
+      "skills": [
+        "Data Analysis",
+        "Python",
+        "SQL",
+        "Tableau"
+      ],
+      "experience_years": 2,
+      "desired_location": "Remote",
+      "job_types": [
+        "CDI",
+        "Remote"
+      ],
+      "salary_min": 2200,
+      "salary_max": 4500,
+      "keywords": "data scientist data analysis Python remote telework"
+    },
+    {
+      "id": "user_mg_005",
+      "name": "Luc Razafindraibe",
+      "email": "luc.razafind@example.com",
+      "skills": [
+        "DevOps",
+        "Docker",
+        "Kubernetes",
+        "AWS"
+      ],
+      "experience_years": 3,
+      "desired_location": "Remote",
+      "job_types": [
+        "CDI"
+      ],
+      "salary_min": 2800,
+      "salary_max": 5500,
+      "keywords": "devops engineer Docker Kubernetes AWS remote telework"
+    }
+  ]
+}
